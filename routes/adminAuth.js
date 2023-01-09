@@ -45,11 +45,15 @@ router.post("/adminLogin", async (req, res) => {
         // generate token
         const token = await admin.generateAuthToken(email, password);
         // add to cookies
-        res.cookie("jwt_token", token, {
-          httpOnly: false,
-        });
+        if (token) {
+          res.cookie("jwt_token", token, {
+            httpOnly: true,
+          });
 
-        res.status(200).json({ message: "login successfully!" });
+          res.status(200).json({ message: "login successfully!" });
+        } else {
+          res.status(404).json({ message: "error for generating token!" });
+        }
       } else {
         res.status(404).json({ message: "invalid credentials!" });
       }
