@@ -55,8 +55,7 @@ adminSchema.methods.generateAuthToken = async function () {
   const admin = this;
   const token = await jwt.sign(
     { _id: admin._id.toString() },
-    "mynameisadmin"
-    // process.env.admin_jwt
+    process.env.admin_jwt
   );
   admin.tokens = admin.tokens.concat({ token });
   await admin.save();
