@@ -12,3 +12,19 @@ res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
           "Content-Type": "application/json",
         },
       })
+
+      {
+    "version": 2,
+    "builds": [
+        {
+            "src": "./index.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
+        }
+    ]
+}
