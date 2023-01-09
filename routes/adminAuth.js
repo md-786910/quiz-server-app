@@ -44,7 +44,7 @@ router.post("/adminLogin", async (req, res) => {
       const matchPassword = await bcrypt.compare(password, admin.password);
       if (matchPassword) {
         // generate token
-        const token = await admin.generateAuthToken(email, password);
+        const token = await admin.generateAuthToken();
         // add to cookies
         if (token) {
           res.cookie("jwt_token", token, {
