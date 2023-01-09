@@ -20,7 +20,9 @@ const userAuth = async (req, res, next) => {
     req.id = user._id;
     next();
   } catch (error) {
-    res.status(404).json({ message: "user not authorized to login!" });
+    res
+      .status(404)
+      .json({ message: "user not authorized to login!" + error.message });
   }
 };
 module.exports = userAuth;

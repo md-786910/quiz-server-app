@@ -18,19 +18,7 @@ router.post("/adminRegister", async (req, res) => {
         res.status(302).json({ message: "Already admin registered!" });
       } else {
         const saveAdmin = new adminModel(req.body);
-        const admin = await saveAdmin.save();
-
-        const token = await admin.generateAuthToken(email, password);
-        // add to cookies
-        if (token) {
-          res.cookie("jwt_token", token, {
-            httpOnly: true,
-          });
-
-          res.status(200).json({ message: "login successfully!" });
-        } else {
-          res.status(404).json({ message: "error for generating token!" });
-        }
+        await saveAdmin.save();
 
         res.status(201).json({ message: "admin registered successfully" });
       }

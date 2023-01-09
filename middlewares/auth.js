@@ -20,7 +20,7 @@ const auth = async (req, res, next) => {
     req.AdminId = user._id;
     next();
   } catch (error) {
-    res.status(404).json({ message: "Admin not authorized to login!" });
+    res.status(404).json({ message: "Admin not authorized to login!" + error });
   }
 };
 module.exports = auth;
