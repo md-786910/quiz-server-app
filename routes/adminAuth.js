@@ -49,6 +49,8 @@ router.post("/adminLogin", async (req, res) => {
         if (token) {
           res.cookie("jwt_token", token, {
             httpOnly: true,
+            secure: true,
+            sameSite: false,
           });
 
           res.status(200).json({ message: "login successfully!" });
