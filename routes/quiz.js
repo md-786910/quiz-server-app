@@ -50,7 +50,7 @@ router.delete("/deleteQuestion", auth, async (req, res) => {
 router.get("/createTest", auth, async (req, res) => {
   try {
     const rand = crypto.randomBytes(10).toString("hex");
-    const examUrl = `http://localhost:3000/user/testPage?id=${rand}`;
+    const examUrl = `https://quiz-client-app.vercel.app/user/testPage?id=${rand}`;
     req.admin.questionToken = req.admin.questionToken.concat({ token: rand });
     await req.admin.save();
     res.cookie("id", req.AdminId);
