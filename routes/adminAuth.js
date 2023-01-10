@@ -35,6 +35,7 @@ router.post("/adminLogin", async (req, res) => {
     res.header("Access-Control-Allow-Headers", "*");
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    // res.header('Authorization', "Bearer ")
 
     const { email, password } = req.body;
     if (email && password) {
@@ -46,6 +47,8 @@ router.post("/adminLogin", async (req, res) => {
         // generate token
         const token = await admin.generateAuthToken();
         // add to cookies
+        res.status(200).json({ message: token });
+
         if (token) {
           res.cookie("jwt_token", token, {
             httpOnly: true,

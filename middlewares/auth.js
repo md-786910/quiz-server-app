@@ -3,9 +3,8 @@ const admin = require("../models/admin/admin");
 
 const auth = async (req, res, next) => {
   try {
-    // const token = req.cookies.jwt_token;
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2JjNWZiMDc1ZWNmZTZhMmNlMzM5NWEiLCJpYXQiOjE2NzMyODk2NTJ9.DHoUqWeRvYC4X8eg_-Ov-CiVXFYcguHzU7ModUTmafg";
+    const token = req.cookies.jwt_token;
+
     const decode = await jwt.verify(token, process.env.admin_jwt);
     const user = await admin.findOne({
       _id: decode._id,
