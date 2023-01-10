@@ -47,13 +47,11 @@ router.post("/adminLogin", async (req, res) => {
         // generate token
         const token = await admin.generateAuthToken();
         // add to cookies
-        res.status(200).json({ message: token });
-
         if (token) {
           res.cookie("jwt_token", token, {
             httpOnly: true,
+            sameSite: "None",
             secure: true,
-            sameSite: false,
           });
 
           res.status(200).json({ message: "login successfully!" });

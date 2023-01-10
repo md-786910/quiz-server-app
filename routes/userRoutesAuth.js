@@ -46,8 +46,11 @@ router.post("/userLogin", async (req, res) => {
         // generate token
         const token = await user.generateAuthToken(email, password);
         // add to cookies
+
         res.cookie("jwt_token_user", token, {
-          httpOnly: false,
+          httpOnly: true,
+          sameSite: "None",
+          secure: true,
         });
 
         res.status(200).json({ message: "login successfully!" });
