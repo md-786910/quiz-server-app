@@ -53,7 +53,14 @@ router.get("/createTest", auth, async (req, res) => {
     const examUrl = `https://quiz-client-app.vercel.app/user/testPage?id=${rand}`;
     req.admin.questionToken = req.admin.questionToken.concat({ token: rand });
     await req.admin.save();
-    res.cookie("id", req.AdminId);
+
+    // res.cookie("id", req.AdminId);
+    res.cookie("id", req.AdminId, {
+      httpOnly: true,
+      sameSite: "None",
+      secure: true,
+    });
+
     res.status(200).json({
       message: "exam link create successfully",
       link: examUrl,
